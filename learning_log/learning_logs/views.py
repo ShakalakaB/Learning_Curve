@@ -9,7 +9,7 @@ from .forms import TopicForm,EntryForm
 # Create your views here.
 def index(request):
     """the home page for Learning Log"""
-    return render(request,'Learning_logs/index.html')
+    return render(request,'learning_logs/index.html')
 
 @login_required
 def topics(request):
@@ -40,7 +40,7 @@ def new_topic(request):
         form=TopicForm(request.POST)
         if form.is_valid():
             new_topic=form.save(commit=False)
-            new_topic.owner=request.user 
+            new_topic.owner=request.user
             new_topic.save()
             return HttpResponseRedirect(reverse('learning_logs:topics'))
     context={'form': form}
