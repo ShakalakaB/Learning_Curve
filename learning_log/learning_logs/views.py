@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect,Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -9,7 +9,7 @@ from .forms import TopicForm,EntryForm
 # Create your views here.
 def index(request):
     """the home page for Learning Log"""
-    return render(request,'Learning_logs/index.html')
+    return render(request,'learning_logs/index.html')
 
 @login_required
 def topics(request):
@@ -21,7 +21,7 @@ def topics(request):
 @login_required
 def topic(request,topic_id):
     """Show a single topic and all its entries."""
-    topic=Topic.objects.get(id=topic_id)
+    topic=get_object_or_404(Topic,id=topic_id)
     #Make sure the topic belongs to the current user.
     if topic.owner!=request.user:
         raise Http404
@@ -40,7 +40,7 @@ def new_topic(request):
         form=TopicForm(request.POST)
         if form.is_valid():
             new_topic=form.save(commit=False)
-            new_topic.owner=request.user 
+            new_topic.owner=request.user
             new_topic.save()
             return HttpResponseRedirect(reverse('learning_logs:topics'))
     context={'form': form}
