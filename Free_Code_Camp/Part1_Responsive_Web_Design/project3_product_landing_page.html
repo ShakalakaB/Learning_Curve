@@ -1,0 +1,102 @@
+<!--
+https://codepen.io/freeCodeCamp/full/RKRbwL
+-->
+<!DOCTYPE html>
+<head>
+    <style>
+        #header{
+            width:100%;
+            display:flex;
+            flex-direction:row;
+            justify-content:space-between;
+            background-color:#fff;
+            position:fixed;
+            top:0;
+            width:100%;
+        }
+        @media (max-width:500px){
+            #header{
+                width:100%;
+                display:flex;
+                flex-direction:row;
+                justify-content:flex-start;
+                background-color:#fff;
+                position:fixed;
+                top:0;
+                width:100%;
+            }
+        }
+        #header-img{
+            width:20%;
+            height:50px;
+            display: flex;
+            max-width: 100%;
+        }
+        #nav-bar{
+           
+            width:50%;
+            display:flex;
+            justify-content:space-around;
+            
+        }
+        .nav-link{
+            display:flex;
+            align-items:center;
+        }
+        #main{
+            display:flex;
+            flex-direction:column;
+          
+        }
+        #video{
+            width:50%;
+            height:auto;
+            margin:auto;
+        }
+        #form{
+            display:flex;
+            flex-direction:column;
+            margin:50px auto 50px auto;
+            width:30%;
+            height:100px;
+            align-items:center;
+        }
+        #email{
+          width:300px;
+          height:40px;
+          
+        }
+        #submit{
+            width:300px;
+           height:40px;
+        }
+        #footer{
+            display:flex;
+            flex-direction: row;
+            justify-content:center;
+        }
+      
+    </style>
+</head>
+<body>
+    <header id="header">
+        <img id="header-img" src="original_trombones.png" alt="">
+        <nav id="nav-bar">
+            <a class="nav-link" href="#video">Video</a>
+            <a class="nav-link" href="#form">Form</a>
+            <a class="nav-link" href="#footer">Footer</a>
+        </nav>
+    </header>
+    <main id="main">
+        <video id="video"  controls>
+            <source src="O Me! O Life! by Walt Whitman, recited by Ole Irenaeus Wieroed [Full HD,1080p].mp4" type="video/mp4">
+        </video>
+        <form id="form" action="https://www.freecodecamp.com/email-submit">
+            <label><input type="email" id="email" name="email" required placeholder="Enter your email address"></label><br>
+            <label><input id="submit" type="submit" value="submit"></label>
+        </form>
+    </main>
+    <footer id="footer">
+        <p>Copyright 2016, Original Trombones</p>
+    </footer>
+</body>

@@ -1,0 +1,138 @@
+<!--https://codepen.io/freeCodeCamp/full/NdrKKL-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            #body{
+                display:flex;
+                flex-direction: row;    
+            }
+            @media (max-width:500px){
+                #main-doc{
+                    order:2;
+                    display:flex;
+                    flex-direction: column;
+                    width:90%;
+                    margin-left:20%;
+                    flex-shrink:0;
+                }
+                #navbar{
+                  order:1;
+                  display:flex;
+                  flex-direction: column;
+                  width:10%;
+                  height:100%;
+                  position:fixed;
+                  z-index:1;
+                  top:0;
+                  left:0;
+                  overflow-x:hidden;
+                  background-color:white;
+                  flex-shrink:0;
+            }
+            }
+            #main-doc{
+                order:2;
+                display:flex;
+                flex-direction: column;
+                width:80%;
+                margin-left:20%;
+                flex-shrink:0;
+            }
+            .main-section{
+                display:flex;
+                flex-direction: column;
+            }
+            #navbar{
+                order:1;
+                display:flex;
+                flex-direction: column;
+                width:20%;
+                height:100%;
+                position:fixed;
+                z-index:1;
+                top:0;
+                left:0;
+                overflow-x:hidden;
+                background-color:white;
+                flex-shrink:0;
+            }
+        </style>
+    </head>
+    <body id="body">
+        <main id="main-doc">
+            <section class="main-section" id="introduction" >
+                <header>Introduction</header>
+                <p>JavaScript is a cross-platform, object-oriented scripting language. It is a small and lightweight language. 
+                    Inside a host environment (for example, a web browser), JavaScript can be connected to the objects of its environment to provide programmatic control over them.
+                </p>
+                <p>JavaScript contains a standard library of objects, such as Array, Date, and Math, and a core set of language elements such as operators, 
+                    control structures, and statements. Core JavaScript can be extended for a variety of purposes by supplementing it with additional objects; for example
+                </p>
+                <code>
+                    x=5;
+                    y=6;
+                    z=x+y;
+                </code>
+                <ul>
+                    <li>A</li>
+                    <li>B</li>
+                    <li>C</li>
+                    <li>D</li>
+                    <li>E</li>
+                </ul>
+            </section>
+            <section class="main-section" id="what_should_you_already_know">
+                <header>What should you already know</header>
+                <p>This guide assumes you have the following basic background</p>
+                <p>This guide assumes you have the following basic background</p>
+                <code>
+                    x=5;
+                    y=6;
+                     z=x+y;
+                </code>
+            </section>
+            <section class="main-section" id="hello_world">
+                <header>Hello world</header>
+                <p>avaScript and Java are similar in some ways but fundamentally different in some others.</p>
+                <p> The JavaScript language resembles Java but does not have Java's static typing and strong type checking. 
+                    JavaScript follows most Java expression syntax, naming conventions and basic control-flow constructs which was the reason why it was renamed from LiveScript to JavaScript.</p>
+                <code>
+                    var x=42;
+                </code>
+            </section>
+            <section class="main-section" id="declaring_variables">
+                <header>Declaring variables</header>
+                <p>You can declare a variable in three ways:</p>
+                <p>This syntax can be used to declare both local and global variables.</p>
+                <code>
+                    x=42;
+                </code>
+            </section>
+            <section class="main-section" id="variable_scope">
+                <header>Variable scope</header>
+                <p>
+                    When you declare a variable outside of any function, it is called a global variable, because it is available to any other code 
+                    in the current document. When you declare a variable within a function, it is called a local variable, because it is available only within that function.
+                </p>
+                <p>JavaScript before ECMAScript 2015 does not have block statement scope; rather, a variable declared within a block is local to the function 
+                    (or global scope) that the block resides within. For example the following code will log 5, because the scope of x is the function (or global context) within which x is declared, not the block, which in this case is an if statement.</p>
+                <code>
+                        if (true) {
+                            var x = 5;
+                          }
+                </code>
+            </section>
+        </main>
+        <nav id="navbar">
+                <header>JS Documentation</header>
+            <ul>
+                <li><a class="nav-link" href="#introduction">Introduction</a></li>
+                <li><a class="nav-link" href="#what_should_you_already_know">What should you already know</a></li>
+                <li><a class="nav-link" href="#hello_world">Hello world</a></li>
+                <li><a class="nav-link" href="#declaring_variables">Declaring variables</a></li>
+                <li><a class="nav-link" href="#variable_scope">Variable scope</a></li>
+            </ul>
+        </nav>
+    </body>
+</html>

@@ -1,0 +1,140 @@
+    <!--
+   https://codepen.io/freeCodeCamp/full/zNBOYG
+-->
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+                #navbar{
+                    text-align: right;
+                    position:fixed;
+                    width:100%;
+                    background-color:#e0ebe8;
+                }
+                #navbar a{
+                    text-decoration:none;
+                    color:#008080;
+                    display:inline-block;
+                    margin:55px;
+                    margin-bottom: 15px;
+                    margin-top: 25px;
+                }
+                #welcome-section{
+                    width:100%;
+                    height:100vh;
+                    background-color:#e0ebe8;
+                    border:#e0ebe8;
+                    display:table;
+                    
+                }
+                @media (max-width:700px){
+                    #navbar{
+                        text-align:left;
+                    }
+                }
+                * {
+                    margin:0;
+                    padding:0;
+                }
+                #welcome-section h1{
+                    text-align: center;
+                    display:table-cell;
+                    vertical-align: middle;
+                    
+                }
+                #projects-parts{
+                    width:100%;
+                    margin:0px auto 50px auto;
+                }
+                #projects-parts h2{
+                    margin:50px;
+                    text-align:center;
+                }
+                #projects{
+                    display:grid;
+                    grid-template-rows:50vh 50vh;
+                    grid-template-columns:50% 50%;
+                }
+                .project-part{
+                    
+                
+                }
+                .project{
+                    text-align:center;
+                    margin:25px auto 25px auto;
+                    width:280px;
+                    height:220px;
+                    border:2px solid lightblue;
+                }
+                .project a {
+                    color:#008080;
+                    text-decoration:none;
+                }
+                .project img{
+                    width:100%;
+                    height:180px;
+                    border-bottom:2px solid lightblue;
+                }
+                .project-title{
+                    font-weight:bold;
+                }
+                footer{
+                    padding:20px;
+                    background-color:#22313F;
+                    color:white;
+
+                }
+            </style>
+        </head>
+        <body>
+            <nav id="navbar">
+                <a href="#welcome-section">About</a>
+                <a href="#projects-parts">Work</a>
+            </nav>
+            <main>
+                <div id="welcome-section">
+                    <h1>Hey I'am Mimic.</h1>
+                </div>
+                <div id="projects-parts">
+                    <h2>These are some of my projects..</h2>
+                    <div id="projects">
+                        <div class="project-part">
+                            <div class="project">
+                                <a id="profile-link" href="https://codepen.io/shakalakab/pen/pqMgJO" target="_blank">
+                                    <img src="p2.png" alt="project">
+                                    <div class="project-title">Technical Documentation Page</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-part">
+                            <div class="project">
+                                <a href="https://codepen.io/shakalakab/pen/WLqMjb" target="_blank">
+                                    <img src="p3.png" alt="project">
+                                    <div class="project-title">Survey Form</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-part">
+                            <div class="project">
+                                <a href="https://codepen.io/shakalakab/pen/gZNpxN" target="_blank">
+                                    <img src="Norman.jpg" alt="project">
+                                    <div class="project-title">Tribute Page</div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-part">
+                            <div class="project">
+                                <a href="https://codepen.io/shakalakab/pen/OrKJBp" target="_blank">
+                                    <img src="p4.png" alt="project">
+                                    <div class="project-title">Product Landing Page</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer>
+                <p>© Created for Free Code Camp</p>
+            </footer>
+        </body>
+    </html>
