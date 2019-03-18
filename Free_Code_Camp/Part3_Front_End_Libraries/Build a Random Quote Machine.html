@@ -6,10 +6,10 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <!--fontawesome-->
-          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" 
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" 
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
         <!--animated css-->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
         <!--google fonts-->
         <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
         <!--JQuery-->
@@ -30,7 +30,7 @@
                 border-radius:3px;
                 font-family: 'Raleway',sans-serif;
             }
-            #text {
+            #quote-text {
                 font-size:2em;
                 text-align:center;
                 font-weight: bold;
@@ -42,26 +42,41 @@
             }
             .buttons{
                 display:flex;
-                align-items:stretch;
+                justify-content: space-between;
             }
             #new-quote{
-                border-radius:3px;
+                border-style:none;
+                height:38px;
+                padding:8px 18px 6px 18px;
                 font-size:0.85em;
-                color:white;
             }
-            .buttons,#quote-box,#author,#text,#tweet-quote,#new-quote{
-                border:2px solid red;
+            /*remove blue outline of button when clicked*/
+            button:focus {outline:0}
+            #tweet-quote{
+                padding-top:6px;
+                font-size:1.2em;
+                height:38px;
+                width:40px;
+                text-align: center;
+            }
+            .button{
+                margin-top:30px;
+                color:white;
+                border-radius:3px;
             }
         </style>
     </head>
     <body>
-      <!-- <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>-->
+      <!--<script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>-->
        <div id="quote-box">
-           <div id="text"></div>
+           <div id="quote-text">
+               <i class="fas fa-quote-left fa-lg"></i>
+               <span id="text"></span>
+           </div>
            <div id="author"></div>
            <div class="buttons">
-               <a class="button" id="tweet-quote" href="twitter.com/intent/tweet"  title="Tweet this quote!" target="_blank">
-                  <i class="fa fa-twitter"></i>
+               <a class="button" id="tweet-quote" href="https://www.twitter.com/intent/tweet"  title="Tweet this quote!" target="_blank">
+                  <i class="fab fa-twitter "></i>
                 </a>
                <button class="button" id="new-quote" onclick="nextQuote()">New quote</button>
             </div>
@@ -80,23 +95,29 @@
             function nextQuote(){
                 createQuote();
             }
-            function createQuote(){
-                //why the function still generate same number
-               let numRandom=function (min,max) {
-                    var random;
+            let numRandom=function (min,max) {
+                var random;
+                if (min==1){
                     do {
                         random = Math.floor(Math.random() * (max - min+1)) + min;
-                    } while (random === numRandom.last);
-                    numRandom.last = random;
+                    } while (random === numRandom.last1);
+                    numRandom.last1 = random;
+                    return random;
+                }else{
+                    do {
+                        random = Math.floor(Math.random() * (max - min+1)) + min;
+                    } while (random === numRandom.last2);
+                    numRandom.last2 = random;
                     return random;
                 }
+            }
+            function createQuote(){
                 let quote=quotes[numRandom(1,5)];
                 document.getElementById("text").innerHTML=quote[0];
                 document.getElementById("author").innerHTML="-"+ quote[1];
                 let color=colors[numRandom(0,8)];
-                $("body").css("background-color",color);
-                $("#text").css("color",color);
-                $("#author").css("color",color);
+                $("body,#new-quote,#tweet-quote").css("background-color",color);
+                $("#quote-text,#author").css("color",color);
             }
             $(document).ready(function(){
                 $("#quote-box").css("backgroundColor","white");
