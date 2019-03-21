@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-<script>
-</script>
-<style>
-  #box {
-    font-size:30px;
-  }
-</style>
+  <meta charset="utf-8"/>
+  <title>Marked in the browser</title>
 </head>
 <body>
-  <div id="box">this is a test paragraph for font-size</div>
+  <div id="content"></div>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
+    document.getElementById('content').innerHTML =
+      marked('  - Some are bulleted.\n\nRendered by **marked**.');
+  </script>
 </body>
 </html>

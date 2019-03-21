@@ -1,0 +1,17 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+div{
+    display:flex;
+    flex-direction: row;
+    #editor {
+        width:50vw;
+        background-color:white;
+    }
+    #preview {
+        width:50vw;
+        background-color:#fcfaf2;
+    }
+}
