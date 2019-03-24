@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import marked from 'marked';
 
@@ -12,21 +13,24 @@ class MdPreviewer extends Component {
         }
         this.handleChange=this.handleChange.bind(this);
         this.mark=this.mark.bind(this);
+        this.deliver=this.deliver.bind(this);
     }
     mark(){
-        var md=marked(this.state.input);
-        return {__html:md};
+        let mdInput=marked(this.state.input,{breaks:true});
+        return {__html:mdInput};
     }
     handleChange(event){
         this.setState({
             input:event.target.value
         }
         );
-        
     }
-    /*why add () after function mark but not handleChange 
-    problem with + - 
-    */
+    /* deliver() can be used to show html format of input*/
+    deliver(){
+        let mdInput=marked(this.state.input,{breaks:true});
+        return mdInput;
+    }
+
     render() {
         return (
             <div id="area">
@@ -35,6 +39,16 @@ class MdPreviewer extends Component {
             </div>
         );
     }
+    /*this is used to debug
+    render(){
+        return(
+            <div id="area">
+                <textarea id="editor" class="col-sm-6" onChange={this.handleChange} value={this.state.input} />
+                <div class="col-sm-6" id="preview" style={{whiteSpace:"pre-line"}}>{this.deliver()}</div>
+            </div>
+        );
+    };*/
+
 }
 
 ReactDOM.render(

@@ -2,9 +2,54 @@
 <html lang='en'>
     <head>
         <meta charset="utf-8">
+        <!--add bootstrap-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!--JQuery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <style>
+            body {
+                margin:0;
+                padding:0;
+                display:flex;
+                justify-content: space-between;
+                flex-direction: row;
+                
+            }
+            #editor{
+                width:50vw;
+                height:100vh;
+                border:solid 2px red;
+            }
+            #preview{
+                width:50vw;
+                height:100vh;
+                background-color:white;
+                border:solid 2px red;
+                
+            }
+            td,th{
+                border:2px solid black;
+            }
+        </style>
     </head>
     <body>
-        <textarea id="editor"></textarea>
-        <div id="preview"></div>
+        <textarea class="col-sm-6" id="editor" oninput="compile()"></textarea>
+        <div class="col-sm-6" id="preview"></div>
+        <!--marked-->
+        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+        <script>
+            //$("#preview").html('<blockquote>Block Quotes!</blockquote>');
+            function compile(){
+                /*using javascript:
+                let content=document.getElementById("editor").value;
+                document.getElementById("preview").innerHTML=content;*/
+                //using jquery:
+                let content=$('#editor').val();
+                content=marked(content,{breaks:true});
+                $("#preview").text(content);
+            }
+        </script>
     </body>
 </html>

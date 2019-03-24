@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -10,8 +11,6 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  
-  
 }
  #editor {
   width: 45vw;
@@ -20,10 +19,23 @@
   background-color: white;
 }
  #preview {
-   border:solid 2px red;
+  border:solid 2px red;
   width: 50vw;
   height:100vh;
   height:auto;
+  font-family: sans-serif;
+  font-size:1.25em;
+  text-align:left;
   background-color: #fcfaf2;
+  padding:30px;
+}
+table,th,td{
+  border:1px solid black;
+}
+li{
+  list-style-position: inside;
+}
+ul > li {
+  margin-left: 10px;
 }
 /*# sourceMappingURL=index.css.map */
