@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="Drum_Machine.css">
+        <!--JQuery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="drum-machine">
+            <div id="control">
+                <div id="powrebox">
+                    <div>Power</div>
+                    <label class="switch" id="power">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div id="display"></div>
+                <div id="volume">
+                    <input type="range" min="0" max="100" value="50"  id="volRange">
+                </div>
+                <div id="bankbox">
+                    <div>Bank</div>
+                    <label class="switch" id="bank">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            <div id="keyboard">
+                <div class="drum-pad" id="q">Q
+                    <audio class='clip' id='pq' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3'></audio>
+                    <audio class='clip' id='bq' src='https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3'></audio>
+                </div>
+                <div class="drum-pad" id="w">W
+                    <audio class='clip' id='pw' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-2.mp3'></audio>
+                    <audio class='clip' id='bw' src='https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3'></audio>
+                </div>
+                <div class="drum-pad" id="e">E
+                    <audio class='clip'id='pe' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-3.mp3'></audio>
+                    <audio class='clip' id='be' src='https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3'></audio>
+                </div>
+                <div class="drum-pad" id="a">A
+                    <audio class='clip' id='pa' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-4_1.mp3'></audio>
+                    <audio class='clip' id='ba' src='https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3'></audio>
+                </div>
+                <div class="drum-pad" id="s">S
+                    <audio class='clip' id='ps' src='https://s3.amazonaws.com/freecodecamp/drums/Heater-6.mp3'></audio>
+                    <audio class='clip' id='bs' src='https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3'></audio>
+                </div>
+                <div class="drum-pad" id="d">D
+                    <audio class='clip' id='pd' src='https://s3.amazonaws.com/freecodecamp/drums/Dsc_Oh.mp3'></audio>
+                    <audio class='clip' id='bd' src='https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3'></audio>
+                </div>
+                <div class="drum-pad" id="z">Z
+                    <audio id='pz' src='https://s3.amazonaws.com/freecodecamp/drums/Kick_n_Hat.mp3'></audio>
+                    <audio id='bz' src='https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3'></audio>
+                </div>
+                <div class="drum-pad" id="x">X
+                    <audio class='clip' id='px' src='https://s3.amazonaws.com/freecodecamp/drums/RP4_KICK_1.mp3'></audio>
+                    <audio class='clip' id='bx' src='https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3'></audio>
+                </div>
+                <div class="drum-pad" id="c">C
+                    <audio class='clip' id='pc' src='https://s3.amazonaws.com/freecodecamp/drums/Cev_H2.mp3'></audio>
+                    <audio class='clip'id='bc' src='https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3'></audio>
+                </div>
+            </div>
+        </div>
+        <script>
+            const projectName="Drum_Machine";
+            localStorage.setItem('example_project','Drum Machine');
+            
+            const keyStr={
+                'pq':'Heater1',
+                'pw':'Heater2',
+                'pe':'Heater3',
+                'pa':'Heater4',
+                'ps':'Clap',
+                'pd':'Open HH',
+                'pz':"Kick n' Hat",
+                'px':'Kick',
+                'pc':'Closed HH',
+                'bq':'Chord1',
+                'bw':'Chord2',
+                'be':'Chord3',
+                'ba':'Shaker',
+                'bs':'Open HH',
+                'bd':'Closed HH',
+                'bz':'Punchy Kick',
+                'bx':'Side Stick',
+                'bc':'Snare'
+            };
+            function bankChange(){
+                if ($("#power input").is(':checked') && !$('#bank input').is(':checked')){
+                    $('#display').html('Heater Kit');
+                }else if($("#power input").is(':checked') && $('#bank input').is(':checked')){
+                    $('#display').html('Smooth Piano Kit');
+                }
+            }
+            function powerChange(){
+                if (!$("#power input").is(':checked')){
+                    $("#bank input").prop('checked',false);
+                    $('#display').html('');
+                }
+            }
+            function volControl(){
+                let vol=this.value/100;
+                $('audio').prop('volume',vol);
+            }
+            function keyStroke(){
+                if ($("#power input").is(':checked') && !$('#bank input').is(':checked')){
+                    console.log('heater');
+                    heater(this);
+                }else if($("#power input").is(':checked') && $('#bank input').is(':checked')){
+                    console.log('bank');
+                    bank(this);
+                }else{
+                    //Do nothing
+                }
+            }
+            function heater(){
+                let key='p'+event.target.id;
+                let str=keyStr[key];
+                $('#'+key).prop('currentTime',0);
+                $('#'+key).trigger('play');
+                $("#display").html(str);
+            }
+            function bank(){
+                let key='b'+event.target.id;
+                let str=keyStr[key];
+                $('#'+key).prop('currentTime',0);
+                $('#'+key).trigger('play');
+                $("#display").html(str);
+            }
+            $(document).ready(function(){
+                $("#power input").prop('checked',true);
+                $("#bank input").prop('checked',false);
+                $(".drum-pad").click(keyStroke);
+                $("#bank input").click(bankChange);
+                $("#power input").click(powerChange);
+                $("#volRange").on('input',volControl);
+            });
+        </script>
+    </body>
+</html>
