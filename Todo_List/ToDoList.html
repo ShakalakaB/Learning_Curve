@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="uft-8">
+        <!--JQuery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <input id="inputAdd" type="text">
+        <input id="add" type="submit" value="Submit">
+        <div id="filterGro">
+            <input id="all" type="radio" name='filter' value="all">All
+            <input id="com" type="radio" name='filter' value="completed">Completed
+            <input id="inc" type="radio" name='filter' value="incompleted">Incompleted
+        </div>
+        <ul id="list"></ul>
+        <script>
+            let allList=[];
+            let id=1;
+            function addTodo(){
+                console.log("inside submit");
+                let item=$("#inputAdd").val();
+                let obj={
+                    'id':id,
+                    'item':item,
+                    'state':false
+                };
+                id++;
+                console.log(obj);
+                allList.push(obj);
+                $('#inputAdd').val('');
+                $('#list').html(display);
+                $('li').click(changeState);
+            }
+            function display(){
+                if($('#all').is(':checked')){
+                    console.log('all');
+                    return allList.map(e=>liElement(e));
+                }else if($('#com').is(':checked')){
+                    return allList.filter(e=>e['state']==true).map(e=>liElement(e));
+                }else{
+                    return allList.filter(e=>e['state']==false).map(e=>liElement(e));
+                }
+            }
+            function liElement(_e){
+                let ele=document.createElement('li');
+                ele.setAttribute('id',_e['id']);
+                if (_e['state']==true){ele.style.textDecoration='line-through'}
+                ele.appendChild(document.createTextNode(_e['item']));
+                return ele;
+            }
+            function changeState(event){
+                console.log('inside changeState');
+                allList[event.target.id-1]['state']=!allList[event.target.id-1]['state'];
+                $('#list').html(display);
+                $('li').click(changeState);
+            }
+            $(document).ready(function(){
+                $("#all").prop('checked',true);
+                $("#add").click(addTodo);
+                $("#filterGro input").click(()=>{
+                    $('#list').html(display);
+                    $('li').click(changeState);
+                });
+            });
+        </script>
+    </body>
+</html>
