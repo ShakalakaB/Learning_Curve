@@ -1,5 +1,6 @@
 Example Project:https://codepen.io/no_stack_dub_sack/pen/JbPZvm?editors=0010
 FreeCodeCamp-Front End Libraries Projects - Build a Markdown Previewer
+Configuration: React+Webpack+Babel
 
 # markPre_with_toolbar
 Description: Free Code Camp part3 project2 plus version, not only display markdown file, but also input with toolbar

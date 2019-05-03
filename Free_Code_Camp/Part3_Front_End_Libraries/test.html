@@ -1,27 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head></head>
+  <head>
+      <meta charset="utf-8">
+      <style>
+          @font-face {
+              font-family: 'Digital-7';
+              src: url('digital-7.ttf');
+          }
+          body{
+              font-family: 'Digital-7';
+          }
+          body{
+              margin:0;
+              padding:0;
+              height:100vh;
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              font-family: 'Russo One';
+              background-color:lightblue;
+          }
+          #root{
+              width:660px;
+              height:300px;
+              /*display:grid;
+              grid-template-columns:60% 40%;
+              grid-template-rows: 1fr; */
+              border:3px solid #f95658;
+              background-color: white;
+          }
+      </style>
+  </head>
   <body>
-      <table border="1">
-          <thead>
-              <tr>
-                  <th>Wild Header</th>
-                  <th>Crazy Header</th>
-                  <th>Another Header?</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <th>Your content can</th>
-                  <td>be here, and it</td>
-                  <td>can be here....</td>
-              </tr>
-              <tr>
-                  <th>And here.</th>
-                  <td>Okay.</td>
-                  <td>I think we get it.</td>
-              </tr>
-          </tbody>
-      </table>
+      <div id="root">
+          <div id="calculator">
+              <div id="display">
+                  <div id="output"></div>
+                  <div id="input"></div>
+              </div>
+              <div id="keyboard"></div>
+          </div>
+      </div>
   </body>
 </html>

@@ -1,0 +1,65 @@
+$keyIDs:zero,one,two,three,four,five,six,seven,eight,nine,add,subtract,multiply,divide,decimal,clear,equals;
+body{
+    margin:0;
+    padding:0;
+    height:100vh;
+    background-color: #36384C;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    #calculator{
+        width:330px;
+        height:390px;
+        padding:5px;
+        background-color:#e9dccd;
+        #displays{
+            height:15%;
+            background-color: black;
+            color:white;
+            text-align:right;
+            #output{
+                padding-right: 5px;
+                height:50%;
+            }
+            #display{
+                padding-right: 5px;
+                height:50%;
+            }
+        }
+        #keyboard{
+            display:grid;
+            grid-gap:2px;
+            grid-auto-rows: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-areas: 
+                "clear clear divide multiply"
+                "seven eight nine subtract"
+                "four five six add"
+                "one two three equals"
+                "zero zero decimal equals";
+            height:85%;
+            background-color:#e9dccd;
+            .grid-item{
+                background-color:#F5AB99;
+            }
+            @each $keyID in $keyIDs{
+                $value:$keyID;
+                //@debug "value1:#{$value}";
+                ##{$value}{
+                    display:flex;
+                    justify-content: center;
+                    align-items: center;
+                    grid-area:$value;
+                    text-align: center;
+                    cursor:pointer;
+                    user-select: none;
+                   //@debug "value2:#{$value}";
+                }
+                ##{$value}:hover{
+                    border:2px solid #f9f9f9;
+                    font-weight:bold;
+                }
+            }
+        }
+    }
+}
