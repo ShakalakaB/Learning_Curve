@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+@font-face {
+    font-family: 'Digital-7';
+    src:url('digital-7.ttf');
+}
+body{
+    margin:0;
+    padding:0;
+    height:100vh;
+    background-color:#0abab5;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    #clock{
+        width:500px;
+        height:455px;
+        display:grid;
+        grid-template-rows: 1fr 3fr 5fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+            "title title"
+            "break1 session"
+            "timer timer";
+        user-select: none;
+        font-family: 'Righteous', cursive;
+        color:#d3e1ea;
+        #title{
+            text-align: center;
+            font-size:50px;
+            grid-area: title;
+        }
+        #break{
+            grid-area: break1;
+            //border:2px solid white;
+            font-size:30px;
+            padding-top: 25px;
+            #break-label{text-align:center}
+            #break-box{
+                display:flex;
+                justify-content: center;
+                #break-decrement{
+                    order:1;
+                    margin-right:10px;
+                }
+                #break-length{
+                    order:2;
+                    width:40px;
+                    margin-right:10px;
+                    text-align: center;
+                }
+                #break-increment{order:3}
+            }
+        }
+        #session{ 
+            grid-area:session;
+            //border:2px solid white;
+            font-size:30px;
+            padding-top: 25px;
+            #session-label{text-align:center}
+            #session-box{
+                display:flex;
+                justify-content: center;
+                #session-decrement{
+                    order:1;
+                    margin-right:10px;
+                }
+                #session-length{
+                    order:2;
+                    width:40px;
+                    margin-right:10px;
+                    text-align: center;
+                }
+                #session-increment{order:3}
+            }
+        }
+        #timer{
+            width:284px;
+            height:174px;
+            margin: auto;
+            margin-top: 0px;
+            padding-top:20px;
+            grid-area: timer;
+            border-radius:25px;
+            border:10px solid #d3e1ea;
+            #timer-label{
+                font-size:30px;
+                text-align: center;
+            }
+            #time-left{
+                height:50px;
+                font-family: 'Digital-7';
+                font-size:50px;
+                text-align:center;
+                margin-top:10px;
+                display:flex;
+                justify-content: center;
+                & > div{
+                    width:25px;
+                }
+            }
+            #control{
+                margin-top:15px;
+                display:flex;
+                flex-direction: row;
+                justify-content: center;
+            }
+            #start_stop{
+                margin-right: 25px;
+            }
+        }
+        .select:hover{
+            cursor:pointer;
+        }
+    }
+}

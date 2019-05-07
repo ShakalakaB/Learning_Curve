@@ -1,7 +1,10 @@
 # Calculator
-#### Example Project:https://codepen.io/freeCodeCamp/full/wgGVVX
+#### Example Project: https://codepen.io/freeCodeCamp/full/wgGVVX
 #### FreeCodeCamp- Front End Libraries Projects - Build a JavaScript Calculator
 ### Configurations: React+React-Redux
+
+Improvement that could be done:
+    1. In input.js，`number, formula` in `initialState` should be string not array.
 
 1-9
 

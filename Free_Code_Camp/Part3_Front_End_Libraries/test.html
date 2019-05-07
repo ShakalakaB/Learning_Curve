@@ -23,22 +23,43 @@
           #root{
               width:660px;
               height:300px;
-              /*display:grid;
-              grid-template-columns:60% 40%;
-              grid-template-rows: 1fr; */
+              display:grid;
+              grid-template-columns:1fr 1fr;
+              grid-template-rows: 1fr 1fr; 
+              grid-template-areas: 
+                "display keyboard"
+                "test1 test2";
               border:3px solid #f95658;
               background-color: white;
           }
+          #display{
+              grid-area: display;
+              border:2px solid black;
+            }
+          #keyboard{
+              grid-area: keyboard;
+              border:2px solid green;
+            }
+          #test1{
+              grid-area: test1;
+              border:2px solid black;
+            }
+          #test2{
+              grid-area: test2;
+              border:2px solid black;
+            }
       </style>
   </head>
   <body>
       <div id="root">
-          <div id="calculator">
-              <div id="display">
+          <div >
+              <div id="display">display
                   <div id="output"></div>
                   <div id="input"></div>
               </div>
-              <div id="keyboard"></div>
+              <div id="keyboard">keyboard</div>
+              <div id="test1">test1</div>
+              <div id="test2">test2</div>
           </div>
       </div>
   </body>

@@ -59,7 +59,6 @@ class Calculator extends React.Component{
                     {keyboard}
                 </div>
             </div>
-            /*<div id="test">TEST</div>*/
         );
     }
 }

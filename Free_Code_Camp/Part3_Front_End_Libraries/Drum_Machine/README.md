@@ -1,4 +1,4 @@
-Example Project src: https://codepen.io/freeCodeCamp/full/MJyNMd.
+Example Project src: https://codepen.io/shakalakab/pen/QPvYJg.
 FreeCodeCamp-Front End Libraries Projects - Build a Drum Machine
 Questions about the above code:
 ??the use of setTimeout()

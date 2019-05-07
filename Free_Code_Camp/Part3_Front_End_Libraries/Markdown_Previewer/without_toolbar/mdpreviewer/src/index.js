@@ -24,6 +24,7 @@ class MdPreviewer extends Component {
             input:event.target.value
         }
         );
+       // setTimeout(()=>(console.log(this.state.input)),1000);
     }
     /* deliver() can be used to show html format of input*/
     deliver(){
