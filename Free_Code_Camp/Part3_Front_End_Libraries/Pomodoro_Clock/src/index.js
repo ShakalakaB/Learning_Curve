@@ -101,6 +101,7 @@ class Clock extends React.Component{
         }
     }
     reset(){
+        sound.pause();
         sound.currentTime=0;
         clearInterval(timeInterval);
         this.setState({
