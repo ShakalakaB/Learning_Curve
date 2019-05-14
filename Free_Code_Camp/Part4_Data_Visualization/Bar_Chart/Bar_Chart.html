@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <!--Example Project:https://codepen.io/shakalakab/pen/XwXYWq, 
+        Data Visualization Projects - Visualize Data with a Bar Chart-->
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+    </head>
+    <style>
+        body{
+            margin:0px;
+            padding:0px;
+            background-color:beige;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #title{
+            text-align: center;
+        }
+        svg{
+            width:80vw;
+            height:80vh;
+            border:2px solid black;
+        }
+        .bar{
+            fill:navy;
+        }
+        .bar:hover{
+            fill:white;
+        }
+        #tooltip{
+            text-align:center;
+            visibility: hidden;
+            font-weight: bold;
+            background-color: rgba(220,220,220,0.7);
+            display: inline-block;
+            padding: 5px;
+            border-radius: 5px;
+            position: absolute;
+        }
+    </style>
+    <body>
+        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+        <h2 id='title'>United States GDP</h2>
+        <svg id="gdp"></svg>
+        <script>
+            const projectName='bar-chart';
+            localStorage.setItem('FCC visualization project','D3 bar chart');
+            //coded by @ShakalakaB 
+
+            const padding=50;
+            const rectMargin=0;
+            let width=document.getElementById('gdp').getBoundingClientRect().width;
+            let height=document.getElementById('gdp').getBoundingClientRect().height;
+            req= new XMLHttpRequest();
+            req.open("GET",
+                'https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json',
+                true);
+            req.send();
+            req.onload=function(){
+                const json=JSON.parse(req.responseText);
+                const dataset=JSON.parse(JSON.stringify(json['data']));
+                const xScale=d3.scaleTime()
+                               .domain([new Date('1947-01-01'), new Date('2015-07-01')])
+                               .range([padding,width-padding]);
+                const yScale=d3.scaleLinear()
+                               .domain([0,d3.max(dataset,(d)=>d[1])])
+                               .range([height-padding,padding]);
+                
+                function rectWidth (data,index){
+                    return (index!=274)?
+                        (xScale(new Date(dataset[index+1][0]))-xScale(new Date(data[0]))-rectMargin):
+                        2.6;
+                }
+                function tooltip(data){
+                    const arr=data[0].split('-');
+                    return arr[0]+' Q'+((Number(arr[1])-1)/3+1)+'<br>$'+data[1]+' Billion';
+                }
+                function tipAttr(data){
+                    return data[0];
+                }
+                const xAxis=d3.axisBottom(xScale)
+                              .tickFormat(d3.timeFormat('%Y'));
+                const yAxis=d3.axisLeft(yScale);
+
+                const svg=d3.select('svg');
+                const tip=d3.select('body')
+                            .append('div')
+                            .attr('id','tooltip');
+
+                svg.selectAll('rect')
+                   .data(dataset)
+                   .enter()
+                   .append('rect')
+                   .attr('class','bar')
+                   .attr('x',(d)=>xScale(new Date(d[0])))
+                   .attr('y',(d)=>yScale(d[1]))
+                   .attr('width',(d,i)=>rectWidth(d,i))
+                   .attr('height',(d)=>height-padding-yScale(d[1]))
+                   .attr('data-date',d=>d[0])
+                   .attr('data-gdp',d=>d[1])
+                   .on('mouseover',function(d){
+                       tip.html(tooltip(d))
+                          //.attr('data-date',(d)=>d[0]) cause "Uncaught TypeError: Cannot read property '0' of undefined",(o point to the number in d[0])
+                          //because .attr() is already in function(d){...}, so directly use d: .attr('data-date',d[0]), or in following way:
+                          .attr('data-date',tipAttr(d))
+                          .style('left',(d3.event.pageX+20)+'px')
+                          .style('top','400px')
+                          .style('visibility', 'visible');
+                   })
+                   .on('mouseout',()=>{
+                       tip.style('visibility','hidden')
+                   });
+
+                svg.append('g')
+                   .attr("transform","translate(0,"+(height-padding)+")")
+                   .attr('id','x-axis')
+                   .call(xAxis);
+
+                svg.append('g')
+                   .attr("transform","translate("+padding+",0)")
+                   .attr('id','y-axis')
+                   .call(yAxis);
+            }
+        </script>
+    </body>
+</html>
