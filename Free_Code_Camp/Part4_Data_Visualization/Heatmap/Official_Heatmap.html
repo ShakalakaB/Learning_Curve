@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+    </head>
+    <style>
+        svg{
+            
+        }
+    </style>
+    <body>
+        <script>
+           let url="https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json";
+            d3.json(url,(error,dataset)=>{
+                if(error) throw error;
+                let data=dataset['monthlyVariance'].map(({year,month,variance})=>{
+                    let temp=(dataset['baseTemperature']+variance).toFixed(1);
+                    variance=variance.toFixed(1);
+                    month-=1;
+                    return {year,month,temp,variance};
+                });
+            var fontSize = 16;
+            var width = 5*Math.ceil(data.length/12); //1500;
+            var height = 33*12; //400;
+            var padding = {left: 9*fontSize, right: 9*fontSize, top: 1*fontSize, bottom:8*fontSize};
+            const colors=['#313695','#4575b4','#74add1','#abd9e9','#e0f3f8','#ffffbf','#fee090','#fdae61','#f46d43','#d73027','#a50026'];
+            const legendWidth = 400;
+            const legendHeight = 300/colors.length;
+            const tempMax=Math.max(...data.map(d=>d['temp']));
+            const tempMin=Math.min(...data.map(d=>d['temp']));
+            console.log('tempMax: '+tempMax+" tempMin: "+tempMin);
+
+            const xScale=d3.scaleBand()
+                           .domain(data.map(d=>d['year']))
+                           .range([padding.left,width+padding.left]);
+            const yScale=d3.scaleBand()
+                           .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+                           .range([padding.top,height+padding.top]); 
+            const xAxis=d3.axisBottom(xScale)
+                          .tickValues(xScale.domain().filter(year=>year%10==0))
+                          .tickFormat(year=>{
+                              let date=new Date(0);
+                              date.setUTCFullYear(year);
+                              return d3.timeFormat("%Y")(date); 
+                              //return year;
+                          })
+                          .tickSize(10,1);
+            const yAxis=d3.axisLeft(yScale)
+                          //.tickValues(yScale.domain())
+                          .tickFormat(month=>{
+                              let date=new Date(0);
+                              date.setUTCMonth(month);
+                              return d3.timeFormat("%B")(date);
+                          })
+                          .tickSize(10,1);
+            const legendThreshold=d3.scaleThreshold()
+                  .domain(function(min,max,count){
+                      var array = [];
+                      var step = (max-min)/count;
+                      var base = min;
+                      console.log("step: "+step+' base: '+base);    
+                      for(var i = 1; i < count; i++){
+                          array.push(base + i*step);
+                    }
+                    //console.log(array);
+                      return array;
+                 }(tempMin, tempMax,colors.length))
+                  .range(colors);
+            const legendX=d3.scaleLinear()
+                  .domain([tempMin,tempMax])
+                  .range([padding.left,legendWidth+padding.left]);
+            const legendXAxis=d3.axisBottom(legendX)
+                  .tickSize(10.0)
+                  .tickValues(legendThreshold.domain())
+                  .tickFormat(d3.format(".1f"));
+            var svg = d3.select('body').append("svg")
+                        .attr('id','heatmap')
+                        .attr('width',width + padding.left + padding.right)
+                        .attr('height',height + padding.top + padding.bottom);
+        
+            svg.selectAll('rect')
+               .data(data)
+               .enter()
+               .append('rect')
+               .attr('class','cell')
+               .attr('x',d=>xScale(d['year']))
+               .attr('y',d=>yScale(d['month']))
+               .attr('width',d=>xScale.bandwidth())
+               .attr('height',d=>yScale.bandwidth())
+               .attr('fill',(d,i)=>legendThreshold(d['temp']))
+               .attr('data-month',d=>d['month'])
+               .attr('data-year',d=>d['year'])
+               .attr('data-temp',d=>d['temp']);
+            svg.append('g')
+               .attr('transform',"translate(0"+ "," + (height + padding.top) + ")")
+               .call(xAxis);
+            svg.append('g')
+               .attr('transform',"translate("+padding.left+",0)")
+               .call(yAxis);
+            svg.append('g')
+               .attr('transform',"translate(0"+','+(height+padding.top+fontSize*4)+")")
+               .call(legendXAxis);
+
+            svg.append('g')
+                .selectAll('rect')
+               .data(legendThreshold.range().map(function(color){
+                   var d = legendThreshold.invertExtent(color);
+                   if(d[0] == null) d[0] = legendX.domain()[0];
+                   if(d[1] == null) d[1] = legendX.domain()[1];
+                   return d;
+                }))
+                .enter()
+                .append('rect')
+                .attr('x',(d,i)=>legendX(d[0]))
+                .attr('y',height+padding.top+fontSize*4-legendHeight)
+                .attr('width',(d,i)=>legendX(d[1])-legendX(d[0]))
+                .attr('height',legendHeight)
+                .style('fill',(d,i)=>legendThreshold(d[0]));
+            });
+        </script>
+    </body>
+</html>

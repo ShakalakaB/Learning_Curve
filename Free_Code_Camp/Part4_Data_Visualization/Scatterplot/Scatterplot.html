@@ -1,7 +1,7 @@
     <!DOCTYPE html>
     <html lang='en'>
         <!--Example Project:https://codepen.io/shakalakab/pen/RmojBW, 
-        Data Visualization Projects - Visualize Data with a Bar Chart-->
+        Data Visualization Projects - Visualize Data with a Scatterplot-->
         <head>
             <meta charset="utf-8">
             <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -146,12 +146,6 @@
                     .on('mouseout',()=>{
                         tip.style('visibility','hidden')
                     });
-                    
-                    svg.append('g')
-                       .call(xAxis);
-                    
-                    svg.append('g')
-                       .call(yAxis);
 
                     svg.append('text')
                        .call(yLabel);
